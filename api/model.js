@@ -35,9 +35,8 @@ let Ehdokkaat = new Schema({
   ehdokas_sertifikaatit: {
     type: String
   },
-  
 },{
-    collection: 'ehdokas'
+  collection: 'ehdokas'
 });
 
 module.exports = mongoose.model('Ehdokkaat', Ehdokkaat);

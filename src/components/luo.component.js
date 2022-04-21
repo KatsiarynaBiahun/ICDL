@@ -18,8 +18,7 @@ export default class Luo extends Component {
     this.onChangeEhdokasSahkoposti = this.onChangeEhdokasSahkoposti.bind(this); 
     this.onChangeEhdokasPuhelin = this.onChangeEhdokasPuhelin.bind(this);
     this.onChangeEhdokasSertifikaatitNimi = this.onChangeEhdokasSertifikaatitNimi.bind(this);
-    this.onChangeEhdokasSertifikaatit = this.onChangeEhdokasSertifikaatit.bind(this);
-   
+    
     this.onSubmit = this.onSubmit.bind(this);
 
     this.state = {
@@ -84,14 +83,19 @@ export default class Luo extends Component {
   }
   onChangeEhdokasSertifikaatitNimi(e) {
     this.setState({
-      ehdokas_sertifikaatit_nimi: e.target.value
+      ehdokas_sertifikaatit_nimi: e.target.value,
     });
+    if (e.target.value==='Database Advanced'){
+      this.setState({
+        ehdokas_sertifikaatit: 'https://openbadgefactory.com/v1/assertion/6999d0b33e72813949bc9f7a7ac2f2073779d593',
+      });
+    } else if (e.target.value==='2D Design'){
+      this.setState({
+        ehdokas_sertifikaatit: 'https://openbadgefactory.com/v1/assertion/832ff61558d3146f13832a385f9cc3f3a7d8e493',
+      });
+    } 
   }
-  onChangeEhdokasSertifikaatit(e) {
-    this.setState({
-      ehdokas_sertifikaatit: e.target.value
-    });
-  }
+  
   
   onSubmit(e) {
     e.preventDefault();
@@ -105,8 +109,8 @@ export default class Luo extends Component {
       ehdokas_postitoimipaikka: this.state.ehdokas_postitoimipaikka,
       ehdokas_sahkoposti: this.state.ehdokas_sahkoposti,
       ehdokas_puhelin: this.state.ehdokas_puhelin,
-      ehdokas_serifikaatit: this.state.ehdokas_sertifikaatit_nimi,
-      ehdokas_serifikaatit: this.state.ehdokas_sertifikaatit,
+      ehdokas_sertifikaatit_nimi: this.state.ehdokas_sertifikaatit_nimi,
+      ehdokas_sertifikaatit: this.state.ehdokas_sertifikaatit,
     };
     axios.post('http://localhost:4000/ehdokas/add', obj)
         .then(res => console.log(res.data));
@@ -122,36 +126,36 @@ export default class Luo extends Component {
       ehdokas_sahkoposti: '',
       ehdokas_puhelin: '',
       ehdokas_sertifikaatit_nimi: '',
-      ehdokas_sertifikaatit: '',
+      ehdokas_sertifikaatit: ''
    })
   }
 
   render() {
     return (
-        <div className='ehdokasLuo' style={{ marginTop: 20 }} >            
+        <div className='ehdokasLuo' style={{ marginTop: 80 }} >            
             <form onSubmit={this.onSubmit} >
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Etunimi</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Etunimi</span>
                     </div>
-                    <input type="text" class="form-control"  value={this.state.ehdokas_etunimi}
+                    <input type="text" className="form-control"  value={this.state.ehdokas_etunimi}
                       onChange={this.onChangeEhdokasEtunimi}/>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sukunimi</span>
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Sukunimi</span>
                     </div>
-                    <input type="text" class="form-control" value={this.state.ehdokas_sukunimi}
+                    <input type="text" className="form-control" value={this.state.ehdokas_sukunimi}
                       onChange={this.onChangeEhdokasSukunimi} />
                   </div>
                 </div>
                 <div className="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Sukupuoli</label>
-                  </div>
-                    <select class="custom-select form-control" value={this.state.ehdokas_sukupuoli}
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <label className="input-group-text" htmlFor="inputGroupSelect01">Sukupuoli</label>
+                    </div>
+                    <select className="custom-select form-control" value={this.state.ehdokas_sukupuoli}
                       onChange={this.onChangeEhdokasSukupuoli} id="inputGroupSelect01">
-                      <option selected>Valitse...</option>
+                      <option defaultValue>Valitse...</option>
                       <option value="Mies">Mies</option>
                       <option value="Nainen">Nainen</option>
                       <option value="Muu">Muu</option>
@@ -159,71 +163,74 @@ export default class Luo extends Component {
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Syntymäpäivä</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Syntymäpäivä</span>
                     </div>
-                    <input type="date" class="form-control" value={this.state.ehdokas_syntymapaiva}
+                    <input type="date" className="form-control" value={this.state.ehdokas_syntymapaiva}
                       onChange={this.onChangeEhdokasSyntymapaiva} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Osoite</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Osoite</span>
                     </div>
-                    <input type="text" class="form-control" value={this.state.ehdokas_osoite}
+                    <input type="text" className="form-control" value={this.state.ehdokas_osoite}
                       onChange={this.onChangeEhdokasOsoite} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Postinnumero</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Postinnumero</span>
                     </div>
-                    <input type="text" class="form-control"  value={this.state.ehdokas_postinnumero}
+                    <input type="text" className="form-control"  value={this.state.ehdokas_postinnumero}
                       onChange={this.onChangeEhdokasPostinnumero}/>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Postitoimipaikka</span>
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Postitoimipaikka</span>
                     </div>
-                    <input type="text" class="form-control" value={this.state.ehdokas_postitoimipaikka}
+                    <input type="text" className="form-control" value={this.state.ehdokas_postitoimipaikka}
                       onChange={this.onChangeEhdokasPostitoimipaikka} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sähköposti</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Sähköposti</span>
                     </div>
-                    <input type="text" class="form-control" value={this.state.ehdokas_sahkoposti}
+                    <input type="text" className="form-control" value={this.state.ehdokas_sahkoposti}
                       onChange={this.onChangeEhdokasSahkoposti} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Puhelin</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Puhelin</span>
                     </div>
-                    <input type="text" class="form-control" value={this.state.ehdokas_puhelin}
+                    <input type="text" className="form-control" value={this.state.ehdokas_puhelin}
                       onChange={this.onChangeEhdokasPuhelin} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sertifikaatin Nimike</span>
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <label className="input-group-text" htmlFor="inputGroupSelect02">Sertifikaatin Nimike</label>
                     </div>
-                    <input type="text" class="form-control" value={this.state.ehdokas_sertifikaatit_nimi}
-                      onChange={this.onChangeEhdokasSertifikaatitNimi} />
+                    <select className="custom-select form-control" value={this.state.ehdokas_sertifikaatit_nimi}
+                      onChange={this.onChangeEhdokasSertifikaatitNimi} id="inputGroupSelect02">
+                      <option defaultValue>Valitse...</option>
+                      <option value="Database Advanced">Database Advanced</option>
+                      <option value="2D Design">2D Design</option>
+                    </select>
                   </div>
                 </div>
-                <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sertifikaatin Linkki</span>
+                <div className="form-group" hidden>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Sertifikaatin Linkki</span>
                     </div>
-                    <input type="text" class="form-control" value={this.state.ehdokas_sertifikaatit}
-                      onChange={this.onChangeEhdokasSertifikaatit} />
+                    <input type="text" className="form-control" value={this.state.ehdokas_sertifikaatit}/>
                   </div>
                 </div>
                

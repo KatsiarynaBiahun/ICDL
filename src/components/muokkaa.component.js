@@ -71,11 +71,13 @@ export default function Muokkaa() {
   function onChangeEhdokasPuhelin(e) {
     setEhdokasPuhelin(e.target.value);
   }
-  function onChangeEhdokasSertifikaatit(e) {
-    setEhdokasSertifikaatit(e.target.value);
-  }
   function onChangeEhdokasSertifikaatitNimi(e) {
     setEhdokasSertifikaatitNimi(e.target.value);
+    if (e.target.value==='Database Advanced'){
+      setEhdokasSertifikaatit('https://openbadgefactory.com/v1/assertion/6999d0b33e72813949bc9f7a7ac2f2073779d593');
+    } else if (e.target.value==='2D Design'){
+      setEhdokasSertifikaatit('https://openbadgefactory.com/v1/assertion/832ff61558d3146f13832a385f9cc3f3a7d8e493');
+    } 
   }
 
   function onSubmit(e) {
@@ -99,110 +101,111 @@ export default function Muokkaa() {
   }
 
   return (
-        <div className='ehdokasMuokkaa' style={{ marginTop: 20 }} >
+        <div className='ehdokasMuokkaa' style={{ marginTop: 80 }} >
             <form onSubmit={onSubmit} >
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Etunimi</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Etunimi</span>
                     </div>
-                    <input type="text" class="form-control"  value={ehdokas_etunimi}
+                    <input type="text" className="form-control"  value={ehdokas_etunimi}
                       onChange={onChangeEhdokasEtunimi}/>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sukunimi</span>
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Sukunimi</span>
                     </div>
-                    <input type="text" class="form-control" value={ehdokas_sukunimi}
+                    <input type="text" className="form-control" value={ehdokas_sukunimi}
                       onChange={onChangeEhdokasSukunimi} />
                   </div>
                 </div>
-
                 <div className="form-group">
-                <div class="input-group mb-3">
-                  <div class="input-group-prepend">
-                    <label class="input-group-text" for="inputGroupSelect01">Sukupuoli</label>
-                  </div>
-                    <select class="custom-select form-control" value={ehdokas_sukupuoli}
+                  <div className="input-group mb-3">
+                    <div className="input-group-prepend">
+                      <label className="input-group-text" htmlFor="inputGroupSelect01">Sukupuoli</label>
+                    </div>
+                    <select className="custom-select form-control" value={ehdokas_sukupuoli}
                       onChange={onChangeEhdokasSukupuoli} id="inputGroupSelect01">
-                      <option selected>Valitse...</option>
+                      <option defaultValue>Valitse...</option>
                       <option value="Mies">Mies</option>
                       <option value="Nainen">Nainen</option>
                       <option value="Muu">Muu</option>
                     </select>
                   </div>
                 </div>
-                
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Syntymäpäivä</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Syntymäpäivä</span>
                     </div>
-                    <input type="date" class="form-control" value={ehdokas_syntymapaiva}
+                    <input type="date" className="form-control" value={ehdokas_syntymapaiva}
                       onChange={onChangeEhdokasSyntymapaiva} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Osoite</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Osoite</span>
                     </div>
-                    <input type="text" class="form-control" value={ehdokas_osoite}
+                    <input type="text" className="form-control" value={ehdokas_osoite}
                       onChange={onChangeEhdokasOsoite} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Postinnumero</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Postinnumero</span>
                     </div>
-                    <input type="text" class="form-control"  value={ehdokas_postinnumero}
+                    <input type="text" className="form-control"  value={ehdokas_postinnumero}
                       onChange={onChangeEhdokasPostinnumero}/>
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Postitoimipaikka</span>
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Postitoimipaikka</span>
                     </div>
-                    <input type="text" class="form-control" value={ehdokas_postitoimipaikka}
+                    <input type="text" className="form-control" value={ehdokas_postitoimipaikka}
                       onChange={onChangeEhdokasPostitoimipaikka} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sähköposti</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Sähköposti</span>
                     </div>
-                    <input type="text" class="form-control" value={ehdokas_sahkoposti}
+                    <input type="text" className="form-control" value={ehdokas_sahkoposti}
                       onChange={onChangeEhdokasSahkoposti} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Puhelin</span>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Puhelin</span>
                     </div>
-                    <input type="text" class="form-control" value={ehdokas_puhelin}
+                    <input type="text" className="form-control" value={ehdokas_puhelin}
                       onChange={onChangeEhdokasPuhelin} />
                   </div>
                 </div>
                 <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sertifikaatin Nimike</span>
-                    </div>
-                    <input type="text" class="form-control" value={ehdokas_sertifikaatit_nimi}
-                      onChange={onChangeEhdokasSertifikaatitNimi} />
+                <div className="input-group mb-3">
+                  <div className="input-group-prepend">
+                    <label className="input-group-text" htmlFor="inputGroupSelect02">Sertifikaatin Nimike</label>
+                  </div>
+                    <select className="custom-select form-control" value={ehdokas_sertifikaatit_nimi}
+                      onChange={onChangeEhdokasSertifikaatitNimi} id="inputGroupSelect02">
+                      <option defaultValue>Valitse...</option>
+                      <option value="Database Advanced">Database Advanced</option>
+                      <option value="2D Design">2D Design</option>
+                    </select>
                   </div>
                 </div>
-                <div className="form-group">
-                  <div class="input-group">
-                    <div class="input-group-prepend">
-                      <span class="input-group-text" id="">Sertifikaatin Linkki</span>
+                <div className="form-group" hidden>
+                  <div className="input-group">
+                    <div className="input-group-prepend">
+                      <span className="input-group-text" id="">Sertifikaatin Linkki</span>
                     </div>
-                    <input type="text" class="form-control" value={ehdokas_sertifikaatit}
-                      onChange={onChangeEhdokasSertifikaatit} />
+                    <input type="text" className="form-control" value={ehdokas_sertifikaatit}/>
                   </div>
                 </div>
                
                 <div className="form-group">
                     <input type="submit" 
-                      value="Päivitä ehdokkaan tiedot" 
+                      value="Päivitä" 
                       className="btn btn-primary"/>
                 </div>
             </form>           
