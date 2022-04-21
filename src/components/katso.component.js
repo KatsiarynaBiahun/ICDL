@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import ImageKopio from '../duplicate.png';
 
 export default function Katso() {
   const params = useParams();
@@ -16,7 +18,7 @@ export default function Katso() {
   const [ehdokas_puhelin, setEhdokasPuhelin] = useState('');
   const [ehdokas_sertifikaatit_nimi, setEhdokasSertifikaatitNimi] = useState('');
   const [ehdokas_sertifikaatit, setEhdokasSertifikaatit] = useState('');
-  
+
   useEffect(() =>  
       axios.get('http://localhost:4000/ehdokas/look/'+ params.id)
           .then(response => {
@@ -48,8 +50,8 @@ export default function Katso() {
           }),[params.id]);
 
     return (
-        <div className='ehdokasKatso' style={{ marginTop: 20 }}>
-          <table class="table table-hover">
+        <div className='ehdokasKatso' style={{ marginTop: 80 }}>
+          <table className="table table-hover">
             <tbody>
               <tr>
                 <th scope="col">Etunimi: </th>
@@ -89,7 +91,13 @@ export default function Katso() {
               </tr>
               <tr>
                 <th scope="col">Sertifikaatin Nimike: </th>
-                <td>{ehdokas_sertifikaatit_nimi}</td>
+                <td>
+                  {ehdokas_sertifikaatit_nimi}
+                  <CopyToClipboard text={ehdokas_sertifikaatit}
+                    onCopy={ehdokas_sertifikaatit}>
+                    <button className="btn btn-light"><img src={ImageKopio} alt="profile" style={{width: 20}}/> </button>
+                  </CopyToClipboard>
+                </td>
               </tr>
               
             </tbody>

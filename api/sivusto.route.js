@@ -1,25 +1,23 @@
 const alert = require('alert');
 
 const express = require('express');
-const kirjastoRoutes = express.Router();
-let Ehdokkaat = require('./kirjasto.model');
+const sivustoRoutes = express.Router();
+let Ehdokkaat = require('./model');
 
 // Ehdokkaan lisääminen polku
-kirjastoRoutes.route('/add').post(function (req, res) {
+sivustoRoutes.route('/add').post(function (req, res) {
   let ehdokas = new Ehdokkaat(req.body);
   ehdokas.save()
     .then(ehdokas => {
-      //res.status(200).json({'ehdokas': 'tallennettiin tietokantaan'});
       alert('Tallennettiin');
     })
     .catch(err => {
-      //res.status(400).send("Ei tallennetu tietokantaan");
       alert('Ei tallennetu');
     });
 });
 
 // Alkuperäinen polku ja polku projektista -sivu
-kirjastoRoutes.route('/').get(function (req, res) {
+sivustoRoutes.route('/').get(function (req, res) {
     Ehdokkaat.find(function(err, ehdokas){
     if(err){
       console.log(err);
@@ -31,7 +29,7 @@ kirjastoRoutes.route('/').get(function (req, res) {
 });
 
 // Ehdokkaan tietojen muokkaamisen polku
-kirjastoRoutes.route('/edit/:id').get(function (req, res) {
+sivustoRoutes.route('/edit/:id').get(function (req, res) {
   let id = req.params.id;
   Ehdokkaat.findById(id, function (err, ehdokas){
       res.json(ehdokas);
@@ -39,7 +37,7 @@ kirjastoRoutes.route('/edit/:id').get(function (req, res) {
 });
 
 // Ehdokkaan katsomisen polku
-kirjastoRoutes.route('/look/:id').get(function (req, res) {
+sivustoRoutes.route('/look/:id').get(function (req, res) {
   let id = req.params.id;
   Ehdokkaat.findById(id, function (err, ehdokas){
       res.json(ehdokas);
@@ -48,10 +46,9 @@ kirjastoRoutes.route('/look/:id').get(function (req, res) {
 
 
 // Ehdokkaan päivittämisen polku
-kirjastoRoutes.route('/update/:id').post(function (req, res) {
+sivustoRoutes.route('/update/:id').post(function (req, res) {
     Ehdokkaat.findById(req.params.id, function(err, ehdokas) {
     if (!ehdokas)
-      //res.status(404).send("Tietoa ei löydy");
       alert('Tietoa ei löydy');
     else {
       
@@ -68,11 +65,9 @@ kirjastoRoutes.route('/update/:id').post(function (req, res) {
       ehdokas.ehdokas_sertifikaatit = req.body.ehdokas_sertifikaatit;
 
       ehdokas.save().then(ehdokas => {
-          //res.json('Päivitettiin');
           alert('Päivitettiin');
       })
       .catch(err => {
-            //res.status(400).send("Ei päivitetty");
             alert('Ei päivitetty');
       });
     }
@@ -80,12 +75,11 @@ kirjastoRoutes.route('/update/:id').post(function (req, res) {
 });
 
 // Ehdokkaan poistamisen polku
-kirjastoRoutes.route('/delete/:id').get(function (req, res) {
+sivustoRoutes.route('/delete/:id').get(function (req, res) {
     Ehdokkaat.findByIdAndRemove({_id: req.params.id}, function(err, ehdokas){
         if(err) res.json(err);
-        else alert('Poistettiin'); //res.json('Poistettiin');
+        else alert('Poistettiin'); 
     });
 });
 
-module.exports = kirjastoRoutes;
-
+module.exports = sivustoRoutes;

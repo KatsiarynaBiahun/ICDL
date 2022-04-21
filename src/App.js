@@ -35,17 +35,17 @@ class App extends Component {
       <Router>
         <div className="container-fluid">
           <nav className="navbar navbar-expand-lg navbar-light">
-          <div class="collapse navbar-collapse" id="navbarText">
+          <div className="collapse navbar-collapse" id="navbarText">
               <ul className="navbar-nav mr-auto">
                 <li className="nav-item" >
                   <Link to={'/create'} className="nav-link" onClick={this.onChangeOtsikkoLisaa}>Lisää ehdokas</Link>
                 </li>
-                <li className="nav-item" active>
+                <li className="nav-item" active="true">
                   <Link to={'/index'} className="nav-link" onClick={this.onChangeOtsikko}>Ehdokkaat </Link>
                 </li>
               </ul>
            </div>
-            <Link to={'/'} className="navbar-brand"><img src={Image} alt="profile" style={{width: 50}}/> </Link>
+            <Link to={'/index'} className="navbar-brand"><img src={Image} alt="profile" style={{width: 50}}/> </Link>
           </nav> <br/>
           <h1 className='otsikko'>{this.state.otsikko}</h1>
           </div>
