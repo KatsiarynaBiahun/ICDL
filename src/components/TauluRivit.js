@@ -27,18 +27,18 @@ class TauluRivit extends Component {
         <tr >
           <td className='btn-table'>
             <Link to={"/look/"+this.props.obj._id} className="btn btn-primary"><h6>Katso tiedot</h6></Link>
-            </td>
-          <td>
+          </td>
+          <td className='info-table'>
             {this.props.obj.ehdokas_etunimi}
           </td>
-          <td>
+          <td className='info-table'>
             {this.props.obj.ehdokas_sukunimi}
           </td>
-          <td>
+          <td className='info-table'>
             {this.props.obj.ehdokas_sertifikaatit_nimi} 
             <CopyToClipboard text={this.props.obj.ehdokas_sertifikaatit}
               onCopy={() => this.setState({copied: true})}>
-            <button class="btn btn-light"><img src={ImageKopio} alt="profile" style={{width: 20}}/> </button>
+            <button className="btn btn-light"><img src={ImageKopio} alt="profile" style={{width: 20}}/> </button>
             </CopyToClipboard>
           </td>
           <td className='btn-table'>
